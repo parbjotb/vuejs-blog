@@ -3,14 +3,34 @@
     <h2>Add a New Blog Post</h2>
     <form>
       <label>Blog Title:</label>
-      <input type="text" v-model="title" required  />
+      <input type="text" v-model.lazy="blog.title" required  />
       <label>Blog Content:</label>
-      <textarea v-model="content"></textarea>
+      <textarea v-model.lazy="blog.content"></textarea>
+      <div id="checkboxes">
+        <label>Ninjas</label>
+        <input type="checkbox" value="ninjas" v-model="blog.categories"/>
+        <label>Wizards</label>
+        <input type="checkbox" value="wizards" v-model="blog.categories"/>
+        <label>Mario</label>
+        <input type="checkbox" value="mario" v-model="blog.categories"/>
+        <label>Cheese</label>
+        <input type="checkbox" value="cheese" v-model="blog.categories"/>
+      </div>
+      <label>Author:</label>
+      <select v-model="blog.author">
+        <option v-for="author in authors">{{ author }}</option>
+      </select>
     </form>
     <div id="preview">
       <h3>Preview Blog</h3>
-      <p>Blog title: {{ title }}</p>
-      <p>Blog content: {{ content }}</p>
+      <p>Blog title: {{ blog.title }}</p>
+      <p>Blog content:</p>
+      <p>{{ blog.content }}</p>
+      <p>Blog Categories:</p>
+      <ul>
+        <li v-for="category in blog.categories">{{ category }}</li>
+      </ul>
+      <p>Author: {{ blog.author }}</p>
     </div>
   </div>
 </template>
@@ -20,9 +40,16 @@ export default {
 
   data () {
     return {
+      // v-model is the input binding method
+      // v-model.lazy makes it so the data won't show till we hit TAB
       // by putting these properties in the data, it can be called in the preview section
-      title: "",
-      content: ""
+      blog: {
+        title: "",
+        content: "",
+        categories: [],
+        author: ""
+      },
+      authors: ['Parbjot', 'Test Author', 'Third author']
     }
   },
   methods: {
@@ -57,5 +84,13 @@ h3{
     margin-top: 10px;
 }
 
+#checkboxes input {
+  display: inline=block;
+  margin-right: 10px;
+}
+
+#checkboxes label {
+  display: inline-block;
+}
 
 </style>
