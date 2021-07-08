@@ -1,7 +1,7 @@
 <template>
   <div id="add-blog">
     <h2>Add a New Blog Post</h2>
-    <form>
+    <form v-if="!submitted">
       <label>Blog Title:</label>
       <input type="text" v-model.lazy="blog.title" required  />
       <label>Blog Content:</label>
@@ -20,7 +20,12 @@
       <select v-model="blog.author">
         <option v-for="author in authors">{{ author }}</option>
       </select>
+      <!-- The prevent addition to the click just means it won't leave page after click -->
+      <button v-on:click.prevent="post">Add Blog Post</button>
     </form>
+    <div v-if="submitted">
+      <h3>Thanks for adding your post, this will show when you click submit</h3>
+    </div>
     <div id="preview">
       <h3>Preview Blog</h3>
       <p>Blog title: {{ blog.title }}</p>
@@ -49,11 +54,23 @@ export default {
         categories: [],
         author: ""
       },
-      authors: ['Parbjot', 'Test Author', 'Third author']
+      authors: ['Parbjot', 'Test Author', 'Third author'],
+      submitted: false,
     }
   },
   methods: {
-
+    post: function(){
+      // below in the post brackets is going to be the DB url
+      // the second parameter is what we want to send (in this case title, body and user id)
+      this.$http.post('http://jsonplaceholder.typicode.com/posts', {
+                title: this.blog.title,
+                body: this.blog.content,
+                userId: 1
+            }).then(function(data){
+                console.log(data);
+                this.submitted = true;
+            });
+    }
   }
 }
 </script>
