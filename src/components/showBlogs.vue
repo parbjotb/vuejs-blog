@@ -1,7 +1,8 @@
 <template>
   <div v-theme:column="'narrow'" id="show-blogs">
     <h1>All Blog Articles</h1>
-    <div v-for="blog in blogs" class="single-blog">
+    <input type="text" v-model="search" placeholder="search blogs" />
+    <div v-for="blog in filteredBlogs" class="single-blog">
       <h2 v-rainbow>{{ blog.title | to-uppercase }}</h2>
       <article>{{ blog.body | snippet }}</article>
     </div>
@@ -14,7 +15,8 @@ export default {
 
   data () {
     return {
-      blogs:[]
+      blogs:[],
+      search: ''
     }
   },
   methods: {
@@ -29,6 +31,19 @@ export default {
       // so we get an array of the first 10 posts and store them in blog data array
       this.blogs = data.body.slice(0,10);
     })
+  },
+  computed: {
+    // this is going to replace all blogs in the div above with the filtered array
+    // filtered array coming from what we type in the search bar
+    // the return statement returns an updated array
+    filteredBlogs: function(){
+      // current blogs array with something filtered out of it
+      return this.blogs.filter((blog) => {
+        // search is taken from v-model in the search bar at the top
+        // goes through the blog posts to find a match for what we typed into the search
+        return blog.title.match(this.search);
+      });
+    }
   }
 }
 </script>
