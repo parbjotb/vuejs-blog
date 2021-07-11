@@ -44,6 +44,12 @@ export default {
         return blog.title.match(this.search);
       });
     }
+  },
+  // registering custom filter locally instead of global main.js class
+  filters: {
+    'to-uppercase': function(value){
+      return value.toUpperCase();
+    }
   }
 }
 </script>

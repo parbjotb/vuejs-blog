@@ -10,9 +10,9 @@ Vue.use(VueResource);
 // value refers to the data we use the filter on
 // in this case value will be the blog post title
 
-Vue.filter('to-uppercase', function(value){
-  return value.toUpperCase();
-});
+// Vue.filter('to-uppercase', function(value){
+//   return value.toUpperCase();
+// });
 
 // same protocol as above, first param is name, second param is function which takes value
 // this time we modify the blog body in showBlogs.vue to only have 100 characters and ...
