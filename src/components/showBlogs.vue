@@ -1,5 +1,5 @@
 <template>
-  <div v-theme="'narrow'" id="show-blogs">
+  <div v-theme:column="'narrow'" id="show-blogs">
     <h1>All Blog Articles</h1>
     <div v-for="blog in blogs" class="single-blog">
       <h2 v-rainbow>{{ blog.title }}</h2>
