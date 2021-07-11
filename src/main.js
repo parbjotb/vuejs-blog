@@ -4,6 +4,22 @@ import VueResource from 'vue-resource'
 
 Vue.use(VueResource);
 
+// Filters
+// first parameter is name of filter taken from showBlogs.vue h2
+// second parameter is a function which takes a value
+// value refers to the data we use the filter on
+// in this case value will be the blog post title
+
+Vue.filter('to-uppercase', function(value){
+  return value.toUpperCase();
+});
+
+// same protocol as above, first param is name, second param is function which takes value
+// this time we modify the blog body in showBlogs.vue to only have 100 characters and ...
+Vue.filter('snippet', function(value){
+  return value.slice(0,100) + '...';
+});
+
 // Custom directives
 // takes multiple parameters, first is name of the directive
 // we have v-rainbow in showBlogs.vue so param name is rainbow
