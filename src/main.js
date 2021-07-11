@@ -20,6 +20,20 @@ Vue.directive('rainbow', {
   }
 });
 
+// this will make the element in showBlogs.vue have a wide max maxWidth
+// follows same protocol as above directive
+// first param is the name so we did v-theme for the div
+// second param is an object which has the functionality
+Vue.directive('theme', {
+  bind(el, binding, vnode){
+    if(binding.value == 'wide'){
+      el.style.maxWidth = "1200px";
+    } else if (binding.value == 'narrow'){
+      el.style.maxWidth = "560px";
+    }
+  }
+});
+
 new Vue({
   el: '#app',
   render: h => h(App)
