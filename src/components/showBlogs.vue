@@ -47,8 +47,17 @@ export default {
   },
   // registering custom filter locally instead of global main.js class
   filters: {
+    //toUppercase(value){return value.toUpperCase()} is the same as below
+    // no need for the :function(value) the above way
     'to-uppercase': function(value){
       return value.toUpperCase();
+    }
+  },
+  directives: {
+    'rainbow': {
+      bind(el, binding, vnode){
+        el.style.color = "#" + Math.random().toString().slice(2,8);
+      }
     }
   }
 }
